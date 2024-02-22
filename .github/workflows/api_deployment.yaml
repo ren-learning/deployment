@@ -6,9 +6,13 @@ jobs:
   setup-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Determine environment
-        id: determine-env
-        run: |
+     - name: Checkout
+       uses: actions/checkout@v4
+       with:
+        fetch-depth: 0
+     - name: Determine environment
+       id: determine-env
+       run: |
           if [[ $GITHUB_REF == refs/heads/main ]]; then
              echo "environment=DEV" >> $GITHUB_OUTPUTS
           elif [[ $GITHUB_REF == refs/heads/staging ]]; then
