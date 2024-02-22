@@ -3,9 +3,23 @@ on:
   workflow_dispatch: 
     
 jobs:
+  setup-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine environment
+      id: determine-env
+      run: |
+        if [[ $GITHUB_REF == refs/heads/main ]]; then
+           echo "environment=DEV" >> $GITHUB_OUTPUTS
+          elif [[ $GITHUB_REF == refs/heads/staging ]]; then
+            echo "environment=staging" >> $GITHUB_OUTPUTS
+          else
+            echo "environment=production" >> $GITHUB_OUTPUTS
+          fi
+
   spec_automation:
     runs-on: ubuntu-latest
-    environment: DEV
+    environment: ${{ steps.determine-env.outputs.environment }}
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
