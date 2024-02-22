@@ -14,16 +14,16 @@ jobs:
        id: determine-env
        run: |
           if [[ $GITHUB_REF == refs/heads/main ]]; then
-             echo "environment=DEV" >> $GITHUB_OUTPUT
+             echo "environment=DEV" >> $GITHUB_ENV
           elif [[ $GITHUB_REF == refs/heads/staging ]]; then
-            echo "environment=TEST"  >> $GITHUB_OUTPUT
+            echo "environment=TEST"  >> $GITHUB_ENV
           else
-            echo "environment=PROD"  >> $GITHUB_OUTPUT
+            echo "environment=PROD"  >> $GITHUB_ENV
           fi
 
   spec_automation:
     runs-on: ubuntu-latest
-    #environment: $
+    environment: ${{ GITHUB_ENV }}
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
