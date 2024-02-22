@@ -1,0 +1,39 @@
+name: NTA Service API Spec file deployment
+on:
+  push:
+    branches:
+       - main
+    paths:
+       - '**/api_spec/**'
+  workflow_dispatch: 
+    
+jobs:
+  spec_automation:
+    runs-on: self-hosted
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+    steps:
+      - name: Check OCI CLI installation
+        run: |  
+          cat /etc/os-release
+          sudo apt-get update -y
+          sudo apt-get install python3-pip -y
+          pip show setuptools
+          pip install --upgrade setuptools
+          pip show setuptools
+          pip -V
+          if ! command -v oci &> /dev/null; then
+            echo "OCI CLI not found, installing..."
+            # Continue with the installation steps
+            curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+            chmod +x install.sh
+            ./install.sh --accept-all-defaults
+            sudo mv /home/runner/bin/oci /usr/local/bin
+            oci --version 
+          else
+            echo "OCI CLI already installed"
+          fi
