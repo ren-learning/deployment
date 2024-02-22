@@ -3,30 +3,9 @@ on:
   workflow_dispatch: 
     
 jobs:
-  setup-job:
-    runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.determine-env.outputs.environment }}
-    steps:
-     - name: Checkout
-       uses: actions/checkout@v4
-       with:
-        fetch-depth: 0
-     - name: Determine environment
-       id: determine-env
-       run: |
-          if [[ $GITHUB_REF == refs/heads/main ]]; then
-             echo "environment=DEV" >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/heads/$GIT_TAG_TEST ]]; then
-            echo "environment=TEST"  >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/heads/$GIT_TAG_PROD ]]; then
-            echo "environment=PROD"  >> $GITHUB_OUTPUT
-          fi
-
   spec_automation:
     runs-on: ubuntu-latest
-    needs: setup-job
-    environment:  ${{ needs.setup-job.outputs.environment }}
+    environment: DEV
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
