@@ -7,7 +7,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./api_deployment.yaml@v1
+      - uses: ./.github/workflows/api_deployment.yaml@v1
         with:
           environment: dev
           # Other environment-specific inputs
