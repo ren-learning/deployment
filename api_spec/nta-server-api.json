@@ -1,0 +1,86 @@
+{
+    "requestPolicies": {
+      "cors":{
+        "allowedOrigins": ["*"],
+        "allowedMethods": ["*"],
+        "allowedHeaders": ["*"],
+        "isAllowCredentialsEnabled": true,
+        "maxAgeInSeconds": 3000
+      }
+    },
+    "routes": [
+      {
+        "path": "/",
+        "methods": ["GET"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/"
+        }
+      },
+      {
+        "path": "/issuanceRequest",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/issuanceRequest"
+        }
+      },
+      {
+        "path": "/presentationRequest",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/presentationRequest"
+        }
+      },
+      {
+        "path": "/status",
+        "methods": ["GET"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/status"
+        }
+      },
+      {
+        "path": "/revoke",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/revoke"
+        }
+      },
+      {
+        "path": "/schema",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/schema"
+        }
+      },
+      {
+        "path": "/callback/entra",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/callback/entra"
+        }
+      },
+      {
+        "path": "/temp_token",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/temp_token"
+        }
+      },
+      {
+        "path": "/login",
+        "methods": ["POST"],
+        "backend": {
+          "type": "HTTP_BACKEND",
+          "url": "{{SERVER_HTTPS_DNS}}/login"
+        }
+      }
+    ]
+  }
+  
