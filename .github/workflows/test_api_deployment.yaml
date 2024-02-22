@@ -7,7 +7,7 @@ on:
 jobs:
   spec_automation:
     runs-on: ubuntu-latest
-    environment: DEV
+    environment: TEST
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
