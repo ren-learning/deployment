@@ -6,6 +6,10 @@ on:
     paths:
        - '**/api_spec/**'
   workflow_dispatch: 
+inputs:
+  environment:
+    required: true
+    type: string
     
 jobs:
   spec_automation:
