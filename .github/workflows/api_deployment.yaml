@@ -17,9 +17,9 @@ jobs:
        run: |
           if [[ $GITHUB_REF == refs/heads/main ]]; then
              echo "environment=DEV" >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/heads/${{ GIT_TAG_TEST }} ]]; then
+          elif [[ $GITHUB_REF == refs/heads/$GIT_TAG_TEST ]]; then
             echo "environment=TEST"  >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_REF == refs/heads/${{ GIT_TAG_PROD }} ]]; then
+          elif [[ $GITHUB_REF == refs/heads/$GIT_TAG_PROD ]]; then
             echo "environment=PROD"  >> $GITHUB_OUTPUT
           fi
 
