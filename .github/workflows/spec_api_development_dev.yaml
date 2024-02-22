@@ -1,0 +1,13 @@
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./api_deployment.yaml@v1
+        with:
+          environment: dev
+          # Other environment-specific inputs
