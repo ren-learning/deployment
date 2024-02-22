@@ -1,10 +1,5 @@
 name: DEMO NTA Service API Spec file deployment
 on:
-  push:
-    branches:
-       - main
-    paths:
-       - '**/api_spec/**'
   workflow_dispatch: 
     
 jobs:
