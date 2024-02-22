@@ -16,8 +16,14 @@ jobs:
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
     steps:
-      - name: Running spec automation script
-        run: |
+     - name: Retrieve the OCID of a named compartment in tenancy
+       uses: oracle-actions/run-oci-cli-command@v1.1.1
+       id: find-compartment-id
+       with:
+          command: 'iam compartment list --compartment-id-in-subtree=true'
+          query: "data[?name=='testing'].id"
+     - name: Running spec automation script
+       run: |
             echo ${{ vars.COMPARTMENT_ID }} 
             echo ${{ vars.GATEWAY_ID }}
-        shell: bash
+       shell: bash
