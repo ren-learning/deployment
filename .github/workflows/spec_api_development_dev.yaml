@@ -7,7 +7,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/api_deployment.yaml@v1
-        with:
-          environment: dev
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - uses: ./.github/workflows/api_deployment.yaml@v1
+      with:
+        environment: dev
           # Other environment-specific inputs
