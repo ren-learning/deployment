@@ -23,7 +23,7 @@ jobs:
 
   spec_automation:
     runs-on: ubuntu-latest
-    environment: ${{ GITHUB_ENV }}
+    environment: ${{ vars.GITHUB_ENV }}
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
