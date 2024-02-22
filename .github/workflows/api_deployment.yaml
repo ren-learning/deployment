@@ -14,11 +14,11 @@ jobs:
        id: determine-env
        run: |
           if [[ $GITHUB_REF == refs/heads/main ]]; then
-             echo "environment=DEV" >> $GITHUB_OUTPUTS
+             echo "environment=DEV"
           elif [[ $GITHUB_REF == refs/heads/staging ]]; then
-            echo "environment=staging" >> $GITHUB_OUTPUTS
+            echo "environment=staging"
           else
-            echo "environment=production" >> $GITHUB_OUTPUTS
+            echo "environment=production"
           fi
 
   spec_automation:
