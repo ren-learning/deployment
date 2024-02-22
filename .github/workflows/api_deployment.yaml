@@ -37,3 +37,15 @@ jobs:
           else
             echo "OCI CLI already installed"
           fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Running spec automation script
+        working-directory: api_spec
+        run: |
+            chmod +x api_deployment_create.sh
+            ./api_deployment_create.sh ${{ vars.NAMESPACE }} ${{ vars.API_NAME }} ${{ vars.COMPARTMENT_ID }} ${{ vars.GATEWAY_ID }} ${{ vars.API_DESCRIPTION }} ${{ vars.PATH_PREFIX }} ${{ vars.SPEC_FILE }}
+        shell: bash
