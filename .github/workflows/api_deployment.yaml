@@ -47,5 +47,6 @@ jobs:
         working-directory: api_spec
         run: |
             chmod +x api_deployment_create.sh
-            ./api_deployment_create.sh ${{ vars.NAMESPACE }} ${{ vars.API_NAME }} ${{ vars.COMPARTMENT_ID }} ${{ vars.GATEWAY_ID }} ${{ vars.API_DESCRIPTION }} ${{ vars.PATH_PREFIX }} ${{ vars.SPEC_FILE }}
+            echo ${{ vars.COMPARTMENT_ID }} 
+            echo ${{ vars.GATEWAY_ID }}
         shell: bash
