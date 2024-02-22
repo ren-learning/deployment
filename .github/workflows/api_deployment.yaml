@@ -23,6 +23,7 @@ jobs:
 
   spec_automation:
     runs-on: ubuntu-latest
+    needs: setup-job
     environment: ${{ needs.setup-job.outputs.environment }}
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
