@@ -16,14 +16,14 @@ jobs:
           if [[ $GITHUB_REF == refs/heads/main ]]; then
              echo "environment=DEV" >> $GITHUB_OUTPUT
           elif [[ $GITHUB_REF == refs/heads/staging ]]; then
-            echo "environment=TEST" >> $GITHUB_OUTPUT
+            echo "environment=TEST"  >> $GITHUB_OUTPUT
           else
-            echo "environment=PROD" >> $GITHUB_OUTPUT
+            echo "environment=PROD"  >> $GITHUB_OUTPUT
           fi
 
   spec_automation:
     runs-on: ubuntu-latest
-    environment: ${{ steps.determine-env.outputs.environment }}
+    #environment: $
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
