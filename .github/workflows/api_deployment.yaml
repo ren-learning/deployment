@@ -6,14 +6,11 @@ on:
     paths:
        - '**/api_spec/**'
   workflow_dispatch: 
-inputs:
-  environment:
-    required: true
-    type: string
     
 jobs:
   spec_automation:
     runs-on: ubuntu-latest
+    environment: DEV
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
@@ -50,7 +47,6 @@ jobs:
       - name: Running spec automation script
         working-directory: api_spec
         run: |
-            chmod +x api_deployment_create.sh
             echo ${{ vars.COMPARTMENT_ID }} 
             echo ${{ vars.GATEWAY_ID }}
         shell: bash
