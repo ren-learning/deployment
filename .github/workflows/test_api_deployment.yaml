@@ -1,0 +1,22 @@
+name: DEMO NTA Service API Spec file deployment
+on:
+  push:
+   tags: [ 'v*.*.*' ]
+  workflow_dispatch: 
+    
+jobs:
+  spec_automation:
+    runs-on: ubuntu-latest
+    environment: DEV
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+    steps:
+      - name: Running spec automation script
+        run: |
+            echo ${{ vars.COMPARTMENT_ID }} 
+            echo ${{ vars.GATEWAY_ID }}
+        shell: bash
