@@ -21,12 +21,6 @@ jobs:
        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
        id: extract_branch
       
-     - name: Retrieve the OCID of a named compartment in tenancy
-       uses: oracle-actions/run-oci-cli-command@v1.1.1
-       id: find-compartment-id
-       with:
-          command: 'iam compartment list --compartment-id-in-subtree=true'
-          query: "data[?name=='testing'].id"
      - name: Running spec automation script
        run: |
             echo ${{ vars.COMPARTMENT_ID }} 
