@@ -1,10 +1,6 @@
 name: DEMO NTA Service API Spec file deployment
 on:
   workflow_dispatch: 
-    inputs:
-      release_version:
-        description: 'Define release_version'     
-        required: true
     
 jobs:
   spec_automation:
@@ -17,14 +13,14 @@ jobs:
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
     steps:
-     - name: Extract branch name
+     - name: Extract release name
        shell: bash
-       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-       id: extract_branch
+       run: echo "release=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | cut -b 10-14 >> $GITHUB_OUTPUT
+       id: extract_release
       
      - name: Running spec automation script
        run: |
             echo ${{ vars.COMPARTMENT_ID }} 
             echo ${{ vars.GATEWAY_ID }}
-            echo ${{ steps.extract_branch.outputs.branch }}
+            echo ${{ steps.extract_release.outputs.release }}
        shell: bash
