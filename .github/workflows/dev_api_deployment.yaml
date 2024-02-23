@@ -16,6 +16,11 @@ jobs:
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
     steps:
+     - name: Extract branch name
+       shell: bash
+       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+       id: extract_branch
+      
      - name: Retrieve the OCID of a named compartment in tenancy
        uses: oracle-actions/run-oci-cli-command@v1.1.1
        id: find-compartment-id
@@ -26,4 +31,5 @@ jobs:
        run: |
             echo ${{ vars.COMPARTMENT_ID }} 
             echo ${{ vars.GATEWAY_ID }}
+            echo ${{ steps.extract_branch.outputs.branch }}
        shell: bash
